@@ -25,13 +25,21 @@ class SharedPref {
 enum SharedKeyItem {
   theme,
   language,
+  token,
+  userName,
 }
 
 extension SharedKeyItems on SharedKeyItem {
   String str() {
-    return switch (this) {
-      SharedKeyItem.theme => "theme",
-      SharedKeyItem.language => "language",
-    };
+    switch (this) {
+      case SharedKeyItem.theme:
+        return "theme";
+      case SharedKeyItem.language:
+        return "language";
+      case SharedKeyItem.token:
+        return "token";
+      case SharedKeyItem.userName:
+        return "userName";
+    }
   }
 }

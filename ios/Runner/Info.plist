@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>YourAppName</string>
+	<string>Arkeoloji</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>YourAppName</string>
+	<string>arkeoloji</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -47,25 +47,5 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-
-	<key>CFBundleLocalizations</key>
-    <array>
-	<string>en</string>
-	<string>nb</string>
-    </array>
-	<key>LSApplicationQueriesSchemes</key>
-	
-	<array>
-	<string>sms</string>
-	<string>tel</string>
-	</array>
-
-	<key>NSCameraUsageDescription</key>
-	<string>Used to demonstrate image picker plugin</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Used to capture audio for image picker plugin</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Used to demonstrate image picker plugin</string>
-
 </dict>
 </plist>

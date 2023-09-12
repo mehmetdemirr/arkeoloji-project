@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
-mixin class DioManager {
+mixin DioManager {
   static final Dio dio = Dio(
-    BaseOptions(baseUrl: "https://jsonplaceholder.typicode.com"),
+    BaseOptions(baseUrl: "http://127.0.0.1:8000"),
   );
 }

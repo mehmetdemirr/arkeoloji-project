@@ -4,15 +4,19 @@ import 'package:demo/core/network_control/no_network_widget.dart';
 import 'package:demo/core/theme/dark_theme.dart';
 import 'package:demo/core/theme/light_theme.dart';
 import 'package:demo/core/theme/theme_view_model.dart';
-import 'package:demo/product/home_screen/home_view_model.dart';
-import 'package:demo/product/network_work_screen/viewmodel/post_view_model.dart';
+import 'package:demo/product/general/model/user_login_model.dart';
+import 'package:demo/product/home_screen/viewmodel/home_view_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  await Hive.initFlutter('uygulama');
+  Hive.registerAdapter(UserLoginModelAdapter());
+  await Hive.openBox<UserLoginModel>('user');
   var darkModeOn = await SharedPref().getTheme();
   runApp(
     MultiProvider(
@@ -22,9 +26,6 @@ void main() async {
         ),
         ChangeNotifierProvider<HomeViewModel>(
           create: (_) => HomeViewModel(),
-        ),
-        ChangeNotifierProvider<PostViewModel>(
-          create: (_) => PostViewModel(),
         ),
       ],
       child: EasyLocalization(
@@ -56,7 +57,7 @@ class MyApp extends StatelessWidget {
       locale: context.deviceLocale,
 
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Arkeoloji',
       //theme
       theme: context.watch<ThemeNotifier>().getTheme() ? darkTheme : lightTheme,
       //router

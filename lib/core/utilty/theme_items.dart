@@ -5,9 +5,11 @@ enum ThemeItem {
 
 extension ThemeItems on ThemeItem {
   bool str() {
-    return switch (this) {
-      ThemeItem.light => false,
-      ThemeItem.dark => true,
-    };
+    switch (this) {
+      case ThemeItem.light:
+        return false;
+      case ThemeItem.dark:
+        return true;
+    }
   }
 }

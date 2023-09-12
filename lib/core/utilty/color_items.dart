@@ -7,9 +7,11 @@ enum ColorItem {
 
 extension ColorItems on ColorItem {
   Color str() {
-    return switch (this) {
-      ColorItem.white => Colors.white,
-      ColorItem.black => Colors.black,
-    };
+    switch (this) {
+      case ColorItem.white:
+        return Colors.white;
+      case ColorItem.black:
+        return Colors.black;
+    }
   }
 }

@@ -7,9 +7,11 @@ enum IconItem {
 
 extension IconItems on IconItem {
   Widget str() {
-    return switch (this) {
-      IconItem.home => const Icon(Icons.home),
-      IconItem.setting => const Icon(Icons.settings),
-    };
+    switch (this) {
+      case IconItem.home:
+        return const Icon(Icons.home);
+      case IconItem.setting:
+        return const Icon(Icons.settings);
+    }
   }
 }

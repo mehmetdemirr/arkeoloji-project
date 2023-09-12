@@ -8,10 +8,13 @@ enum BorderRadiusItem {
 
 extension BorderItems on BorderRadiusItem {
   BorderRadius str() {
-    return switch (this) {
-      BorderRadiusItem.small => const BorderRadius.all(Radius.circular(10)),
-      BorderRadiusItem.medium => const BorderRadius.all(Radius.circular(15)),
-      BorderRadiusItem.large => const BorderRadius.all(Radius.circular(25))
-    };
+    switch (this) {
+      case BorderRadiusItem.small:
+        return const BorderRadius.all(Radius.circular(10));
+      case BorderRadiusItem.medium:
+        return const BorderRadius.all(Radius.circular(15));
+      case BorderRadiusItem.large:
+        return const BorderRadius.all(Radius.circular(25));
+    }
   }
 }

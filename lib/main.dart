@@ -4,8 +4,11 @@ import 'package:demo/core/network_control/no_network_widget.dart';
 import 'package:demo/core/theme/dark_theme.dart';
 import 'package:demo/core/theme/light_theme.dart';
 import 'package:demo/core/theme/theme_view_model.dart';
+import 'package:demo/product/acma_bilgi_screen/view_model/acma_bilgi_viewmodel.dart';
+import 'package:demo/product/acma_screen/viewmodel/acma_viewmodel.dart';
 import 'package:demo/product/general/model/user_login_model.dart';
-import 'package:demo/product/home_screen/viewmodel/home_view_model.dart';
+import 'package:demo/product/kazi_screen/viewmodel/kazi_view_model.dart';
+import 'package:demo/product/kazi_user_add_sceen/viewmodel/kazi_user_viewmodel.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -24,8 +27,17 @@ void main() async {
         ChangeNotifierProvider<ThemeNotifier>(
           create: (_) => ThemeNotifier(darkModeOn ? darkTheme : lightTheme),
         ),
-        ChangeNotifierProvider<HomeViewModel>(
-          create: (_) => HomeViewModel(),
+        ChangeNotifierProvider<KaziViewModel>(
+          create: (_) => KaziViewModel(),
+        ),
+        ChangeNotifierProvider<AcmaViewModel>(
+          create: (_) => AcmaViewModel(),
+        ),
+        ChangeNotifierProvider<AcmaBilgiViewModel>(
+          create: (_) => AcmaBilgiViewModel(),
+        ),
+        ChangeNotifierProvider<KaziUserViewModel>(
+          create: (_) => KaziUserViewModel(),
         ),
       ],
       child: EasyLocalization(

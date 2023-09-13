@@ -1,9 +1,11 @@
 enum ApiItem {
   posts,
   login,
-  register,
+  user,
   currentKazi,
   kazi,
+  acma,
+  acmaBilgi,
 }
 
 extension ApiItems on ApiItem {
@@ -13,12 +15,16 @@ extension ApiItems on ApiItem {
         return "/posts";
       case ApiItem.login:
         return "/auth/login";
-      case ApiItem.register:
+      case ApiItem.user:
         return "/user";
       case ApiItem.currentKazi:
         return "/kazi/current";
       case ApiItem.kazi:
         return "/kazi/";
+      case ApiItem.acma:
+        return "/acma/";
+      case ApiItem.acmaBilgi:
+        return "/acma-bilgi/";
     }
   }
 }

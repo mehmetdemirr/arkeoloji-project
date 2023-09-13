@@ -3,19 +3,19 @@ import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/core/utilty/icon_items.dart';
 import 'package:demo/product/general/model/kazi_model.dart';
 import 'package:demo/product/general/model/user_login_model.dart';
-import 'package:demo/product/home_screen/viewmodel/home_view_model.dart';
+import 'package:demo/product/kazi_screen/viewmodel/kazi_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 @RoutePage()
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class KaziScreen extends StatefulWidget {
+  const KaziScreen({super.key});
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<KaziScreen> createState() => _KaziScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _KaziScreenState extends State<KaziScreen> {
   late UserLoginModel? user;
   @override
   void initState() {
@@ -26,11 +26,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void getKazilar() async {
-    await context.read<HomeViewModel>().getKazilar();
+    await context.read<KaziViewModel>().getKazilar();
   }
 
   void deleteKazi(int id) async {
-    await context.read<HomeViewModel>().deleteKazi(id);
+    await context.read<KaziViewModel>().deleteKazi(id);
   }
 
   @override
@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            child: _customList(context.watch<HomeViewModel>().kazilar),
+            child: _customList(context.watch<KaziViewModel>().kazilar),
           ),
         ],
       ),
@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
       itemBuilder: (context, index) {
         return InkWell(
           onTap: () {
-            context.router.navigateNamed(RouterItem.acmalar.str());
+            context.router.push(AcmaRoute(kaziId: kaziList?[index].id ?? -1));
           },
           child: Card(
             color: Colors.grey.shade200,
@@ -92,12 +92,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 const Spacer(),
-                ElevatedButton(
-                  onPressed: () {
-                    deleteKazi(kaziList?[index].id ?? -1);
-                  },
-                  child: const Text("sil"),
-                ),
+                Column(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        context.navigateTo(
+                          KaziUserAddRoute(kaziId: kaziList?[index].id ?? -1),
+                        );
+                      },
+                      child: const Text("kişi ekle"),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        deleteKazi(kaziList?[index].id ?? -1);
+                      },
+                      child: const Text("sil"),
+                    ),
+                  ],
+                )
               ],
             ),
           ),

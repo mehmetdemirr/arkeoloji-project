@@ -37,7 +37,7 @@ dependencies:
   #image
   image_picker: ^1.0.1
   #permission
-  permission_handler: ^10.4.3
+  permission_handler: ^11.0.0
   app_settings: ^5.0.0
 
 

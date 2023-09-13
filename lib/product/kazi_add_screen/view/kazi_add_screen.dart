@@ -4,7 +4,7 @@ import 'package:demo/core/function/show_snackbar.dart';
 import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/core/utilty/padding_items.dart';
 import 'package:demo/product/general/service/project_dio.dart';
-import 'package:demo/product/home_screen/service/kazi_service.dart';
+import 'package:demo/product/kazi_screen/service/kazi_service.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()

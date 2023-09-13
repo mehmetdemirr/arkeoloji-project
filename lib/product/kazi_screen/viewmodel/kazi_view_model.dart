@@ -1,9 +1,9 @@
 import 'package:demo/product/general/model/kazi_model.dart';
 import 'package:demo/product/general/service/project_dio.dart';
-import 'package:demo/product/home_screen/service/kazi_service.dart';
+import 'package:demo/product/kazi_screen/service/kazi_service.dart';
 import 'package:flutter/material.dart';
 
-class HomeViewModel extends ChangeNotifier {
+class KaziViewModel extends ChangeNotifier {
   List<KaziModel>? kazilar;
 
   Future<void> getKazilar() async {

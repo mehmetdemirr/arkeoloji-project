@@ -1,8 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:demo/core/function/decoration_custom.dart';
+import 'package:demo/core/function/show_snackbar.dart';
 import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/core/utilty/images_items.dart';
 import 'package:demo/core/utilty/padding_items.dart';
+import 'package:demo/product/general/service/project_dio.dart';
+import 'package:demo/product/register_screen/service/register_service.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
@@ -100,9 +103,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      //geçiş
+                      bool value =
+                          await RegisterService(DioManager.dio).register(
+                        _name.text,
+                        _mail.text,
+                        _password.text,
+                      );
+                      if (value) {
+                        // ignore: use_build_context_synchronously
+                        context.router.replaceNamed(RouterItem.login.str());
+                      } else {
+                        // ignore: use_build_context_synchronously
+                        showSnackbar(context, "Kayıt tamamlanamadı !");
+                      }
                     }
                   },
                   child: const Text("Kayıt ol")),

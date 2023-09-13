@@ -7,25 +7,24 @@ import 'package:demo/product/general/model/kazi_model.dart';
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-abstract class IKaziService {
+abstract class IUserService {
   final Dio dio;
-  IKaziService(this.dio);
-  Future<List<KaziModel>?> getKaziList();
-  Future<bool> kaziAdd(String name, String city, String town);
-  Future<bool> kaziDelete(int id);
+  IUserService(this.dio);
+  Future<List<UserModel>?> getUserList();
+  Future<bool> kaziUserAdd(int kaziId, int userId);
 }
 
-class KaziService extends IKaziService {
-  KaziService(super.dio);
+class UserService extends IUserService {
+  UserService(super.dio);
 
   String token = getToken();
 
   @override
-  Future<List<KaziModel>?> getKaziList() async {
+  Future<List<UserModel>?> getUserList() async {
     dio.interceptors.add(PrettyDioLogger());
     try {
       final result = await dio.get(
-        ApiItem.currentKazi.str(),
+        ApiItem.user.str(),
         options: Options(
           headers: {
             'Authorization': 'Bearer $token',
@@ -36,52 +35,24 @@ class KaziService extends IKaziService {
       if (result.statusCode == HttpStatus.ok) {
         var json = result.data;
         if (json is List) {
-          List<KaziModel> kaziListesi =
-              json.map((kaziJson) => KaziModel.fromJson(kaziJson)).toList();
+          List<UserModel> userListesi =
+              json.map((kaziJson) => UserModel.fromJson(kaziJson)).toList();
           // KaziModel nesnelerini içeren bir liste döndürebilirsiniz
-          return kaziListesi;
+          return userListesi;
         }
       }
     } catch (e) {
-      printf("giriş yapılmadı");
+      printf("user list gelmedi");
     }
     return null;
   }
 
   @override
-  Future<bool> kaziAdd(String name, String city, String town) async {
+  Future<bool> kaziUserAdd(int kaziId, int userId) async {
     dio.interceptors.add(PrettyDioLogger());
     try {
       final result = await dio.post(
-        ApiItem.kazi.str(),
-        options: Options(
-          headers: {
-            'Authorization': 'Bearer $token',
-            // Diğer başlıkları da burada ekleyebilirsiniz
-          },
-        ),
-        data: {"name": name, "city": city, "town": town},
-      );
-      if (result.statusCode == HttpStatus.ok) {
-        var json = result.data;
-        if (json is Map<String, dynamic>) {
-          KaziModel? kazi = KaziModel.fromJson(json);
-          // ignore: unnecessary_null_comparison
-          return kazi != null;
-        }
-      }
-    } catch (e) {
-      printf("kazı oluşamadı $e");
-    }
-    return false;
-  }
-
-  @override
-  Future<bool> kaziDelete(int id) async {
-    dio.interceptors.add(PrettyDioLogger());
-    try {
-      final result = await dio.delete(
-        "${ApiItem.kazi.str()}/$id",
+        "/kazi/$kaziId/user/$userId",
         options: Options(
           headers: {
             'Authorization': 'Bearer $token',
@@ -95,10 +66,11 @@ class KaziService extends IKaziService {
           if (json["details"] == "true") {
             return true;
           }
+          return false;
         }
       }
     } catch (e) {
-      printf("kazı siinmedi $e");
+      printf("kayıt yapılmadı $e");
     }
     return false;
   }

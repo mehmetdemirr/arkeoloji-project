@@ -6,6 +6,7 @@ import 'package:demo/core/image_picker/service/pick_manager.dart';
 import 'package:demo/core/lifecycle/lifecycle_use.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 @RoutePage()
 class GetImageScreen extends StatefulWidget {
@@ -32,6 +33,7 @@ class _GetImageScreenState extends State<GetImageScreen>
             //galeriden fotoğraf seç
             ElevatedButton.icon(
               onPressed: () async {
+                await Permission.photos.request();
                 final XFile? image = await PickManager().fetchImageGallery();
                 setState(() {
                   _image = image;
@@ -43,6 +45,7 @@ class _GetImageScreenState extends State<GetImageScreen>
             // kamerdan fotoğraf çek
             ElevatedButton.icon(
               onPressed: () async {
+                await Permission.camera.request();
                 final XFile? image = await PickManager().fetchImageCamera();
                 setState(() {
                   _image = image;

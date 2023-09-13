@@ -14,7 +14,7 @@ abstract class IPickManager {
 class PickManager extends IPickManager {
   @override
   Future<XFile?> fetchImageGallery() async {
-    await Permission.photos.request();
+    // await Permission.photos.request();
     if (!await _iPermissionCheck.gallery()) {
       await AppSettings.openAppSettings();
       return null;
@@ -25,9 +25,10 @@ class PickManager extends IPickManager {
 
   @override
   Future<XFile?> fetchImageCamera() async {
-    await Permission.camera.request();
+    // await Permission.camera.request();
     if (!await _iPermissionCheck.camera()) {
       await AppSettings.openAppSettings();
+      return null;
     }
     return _iPickImage.pickImageCamera();
   }

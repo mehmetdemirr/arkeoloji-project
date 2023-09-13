@@ -2,6 +2,7 @@ enum ImageItem {
   image,
   arkeoloji,
   foto,
+  spalsh,
 }
 
 String defaultValue = "assets/images";
@@ -15,6 +16,8 @@ extension ImageItems on ImageItem {
         return "$defaultValue/arkeoloji.jpeg";
       case ImageItem.foto:
         return "$defaultValue/foto.png";
+      case ImageItem.spalsh:
+        return "$defaultValue/splash.png";
     }
   }
 }

@@ -5,9 +5,17 @@ import 'package:flutter/material.dart';
 
 class KaziViewModel extends ChangeNotifier {
   List<KaziModel>? kazilar;
+  bool isLoading = false;
+
+  void isLoadingchange() {
+    isLoading = !isLoading;
+    notifyListeners();
+  }
 
   Future<void> getKazilar() async {
+    isLoadingchange();
     kazilar = await KaziService(DioManager.dio).getKaziList();
+    isLoadingchange();
     notifyListeners();
   }
 

@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:demo/core/extension/screen_size.dart';
 import 'package:demo/core/navigation/app_router.dart';
+import 'package:demo/core/utilty/images_items.dart';
+import 'package:demo/core/utilty/padding_items.dart';
 import 'package:demo/product/acma_bilgi_screen/view_model/acma_bilgi_viewmodel.dart';
 import 'package:demo/product/general/model/kazi_model.dart';
 import 'package:demo/product/general/model/user_login_model.dart';
@@ -38,7 +40,7 @@ class _AcmaBilgiScreenState extends State<AcmaBilgiScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Acma Bilgi listesi")),
+      appBar: AppBar(title: const Text("Acma Bilgi Listesi")),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -58,47 +60,106 @@ class _AcmaBilgiScreenState extends State<AcmaBilgiScreen> {
     );
   }
 
-  ListView _customList(List<AcmaBilgileri>? acmaBilgiList) {
-    return ListView.builder(
-      itemCount: acmaBilgiList?.length ?? 0,
-      itemBuilder: (context, index) {
-        return InkWell(
-          onTap: () {
-            // context.router
-            //     .push(AcmaBilgiAddRoute(acmaId: kaziList?[index].id ?? -1));
-          },
-          child: Card(
-            color: Colors.grey.shade200,
-            child: Row(
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("id:${acmaBilgiList?[index].id ?? "name null"}"),
-                    Text("name:${acmaBilgiList?[index].name ?? "city null"}"),
-                    Text(
-                        "acma bilgi açıklama:${acmaBilgiList?[index].description ?? "town null"}"),
-                    Text(
-                        "acma bilgi sahibi:${acmaBilgiList?[index].owner?.name ?? "town null"}"),
-                    Image.network(
-                      acmaBilgiList?[index].photo ?? "",
-                      width: context.width / 1.5,
+  Widget _customList(List<AcmaBilgileri>? acmaBilgiList) {
+    return acmaBilgiList != null
+        ? ListView.builder(
+            itemCount: acmaBilgiList.length ?? 0,
+            itemBuilder: (context, index) {
+              return InkWell(
+                onTap: () {
+                  context.navigateTo(
+                      AcmaBilgiDetayRoute(acmaBilgi: acmaBilgiList[index]));
+                },
+                child: Padding(
+                  padding: PaddingItem.small.str(),
+                  child: Card(
+                    child: Padding(
+                      padding: PaddingItem.small.str(),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Text(
+                                //   "id:${acmaBilgiList[index].id ?? "name null"}",
+                                //   overflow: TextOverflow.ellipsis,
+                                // ),
+                                Padding(
+                                  padding: PaddingItem.small.str() / 4,
+                                  child: Text(
+                                    "Ad : ${acmaBilgiList[index].name ?? "ad null"}",
+                                    overflow: TextOverflow.ellipsis,
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: PaddingItem.small.str() / 4,
+                                  child: Text(
+                                    "Açma Bilgi Açıklama : ${acmaBilgiList[index].description ?? "açıklama null"}",
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: PaddingItem.small.str() / 4,
+                                  child: Text(
+                                    "Sahibi :${acmaBilgiList[index].owner?.name ?? "sahibi null"}",
+                                    overflow: TextOverflow.ellipsis,
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                ),
+                                Image.network(
+                                  acmaBilgiList[index].photo ?? "",
+                                  width: context.width / 3,
+                                ),
+                              ],
+                            ),
+                          ),
+                          //const Spacer(),
+                          user?.rol == "admin"
+                              ? ElevatedButton(
+                                  onPressed: () {
+                                    deleteAcmaBilgi(
+                                        acmaBilgiList[index].id ?? -1);
+                                  },
+                                  child: Text(
+                                    "sil",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.copyWith(
+                                          color: Colors.white,
+                                        ),
+                                  ),
+                                )
+                              : const SizedBox(),
+                        ],
+                      ),
                     ),
-                  ],
+                  ),
                 ),
-                const Spacer(),
-                ElevatedButton(
-                  onPressed: () {
-                    deleteAcmaBilgi(acmaBilgiList?[index].id ?? -1);
-                  },
-                  child: const Text("sil"),
+              );
+            },
+          )
+        : Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(
+                  ImageItem.arkeoloji.str(),
+                  fit: BoxFit.cover,
+                  width: context.width / 1.3,
+                  height: context.height / 2,
                 ),
+                const Text("Açma bilgisi bulunamadı !"),
               ],
             ),
-          ),
-        );
-      },
-    );
+          );
   }
 }

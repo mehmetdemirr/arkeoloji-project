@@ -35,6 +35,16 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    AcmaBilgiDetayRoute.name: (routeData) {
+      final args = routeData.argsAs<AcmaBilgiDetayRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: AcmaBilgiDetayScreen(
+          key: args.key,
+          acmaBilgi: args.acmaBilgi,
+        ),
+      );
+    },
     AcmaBilgiRoute.name: (routeData) {
       final args = routeData.argsAs<AcmaBilgiRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -183,6 +193,44 @@ class AcmaBilgiAddRouteArgs {
   @override
   String toString() {
     return 'AcmaBilgiAddRouteArgs{key: $key, acmaId: $acmaId}';
+  }
+}
+
+/// generated route for
+/// [AcmaBilgiDetayScreen]
+class AcmaBilgiDetayRoute extends PageRouteInfo<AcmaBilgiDetayRouteArgs> {
+  AcmaBilgiDetayRoute({
+    Key? key,
+    required AcmaBilgileri acmaBilgi,
+    List<PageRouteInfo>? children,
+  }) : super(
+          AcmaBilgiDetayRoute.name,
+          args: AcmaBilgiDetayRouteArgs(
+            key: key,
+            acmaBilgi: acmaBilgi,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'AcmaBilgiDetayRoute';
+
+  static const PageInfo<AcmaBilgiDetayRouteArgs> page =
+      PageInfo<AcmaBilgiDetayRouteArgs>(name);
+}
+
+class AcmaBilgiDetayRouteArgs {
+  const AcmaBilgiDetayRouteArgs({
+    this.key,
+    required this.acmaBilgi,
+  });
+
+  final Key? key;
+
+  final AcmaBilgileri acmaBilgi;
+
+  @override
+  String toString() {
+    return 'AcmaBilgiDetayRouteArgs{key: $key, acmaBilgi: $acmaBilgi}';
   }
 }
 

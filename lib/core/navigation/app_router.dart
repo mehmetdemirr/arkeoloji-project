@@ -1,11 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:demo/product/acma_add_screen/view/acma_add_screen.dart';
 import 'package:demo/product/acma_bilgi_add_screen/view/acma_bilgi_add_screen.dart';
+import 'package:demo/product/acma_bilgi_detay_screen/view/acma_bilgi_detay_screen.dart';
 import 'package:demo/product/acma_bilgi_screen/view/acma_bilgi_screen.dart';
 import 'package:demo/product/acma_screen/view/acma_screen.dart';
+import 'package:demo/product/general/model/kazi_model.dart';
 import 'package:demo/product/kazi_screen/view/kazi_screen.dart';
 import 'package:demo/product/kazi_add_screen/view/kazi_add_screen.dart';
-import 'package:demo/product/kazi_user_add_sceen/view/kazi_user_add.dart';
+import 'package:demo/product/kazi_user_add_sceen/view/kazi_user_add_screen.dart';
 import 'package:demo/product/login_screen/view/login_screen.dart';
 import 'package:demo/product/register_screen/view/register_screen.dart';
 import 'package:demo/product/setting_screen/setting_screen.dart';
@@ -69,6 +71,10 @@ class AppRouter extends _$AppRouter {
           path: RouterItem.acmaBilgiAdd.str(),
           page: AcmaBilgiAddRoute.page,
         ),
+        AutoRoute(
+          path: RouterItem.acmaBilgiDetay.str(),
+          page: AcmaBilgiDetayRoute.page,
+        ),
       ];
 }
 
@@ -85,6 +91,7 @@ enum RouterItem {
   acmaAdd,
   acmaBilgi,
   acmaBilgiAdd,
+  acmaBilgiDetay,
 }
 
 extension RouterItems on RouterItem {
@@ -114,6 +121,8 @@ extension RouterItems on RouterItem {
         return "/acmaBilgiler";
       case RouterItem.acmaBilgiAdd:
         return "/acmaBilgiAdd";
+      case RouterItem.acmaBilgiDetay:
+        return "/acmaBilgiDetay";
     }
   }
 }

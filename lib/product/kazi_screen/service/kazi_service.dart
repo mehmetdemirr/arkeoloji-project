@@ -36,7 +36,7 @@ class KaziService extends IKaziService {
       if (result.statusCode == HttpStatus.ok) {
         var json = result.data;
         if (json is List) {
-          List<KaziModel> kaziListesi =
+          List<KaziModel>? kaziListesi =
               json.map((kaziJson) => KaziModel.fromJson(kaziJson)).toList();
           // KaziModel nesnelerini içeren bir liste döndürebilirsiniz
           return kaziListesi;

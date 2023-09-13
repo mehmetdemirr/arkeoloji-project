@@ -62,22 +62,24 @@ class _AcmaBilgiAddScreenState extends State<AcmaBilgiAddScreen> {
                   width: 200,
                   child: Image.file(
                     File(_image!.path),
-                  ))
+                    fit: BoxFit.cover,
+                  ),
+                )
               : const SizedBox(),
           //ikinci fotoğraf yazdırma yolu
-          FutureBuilder(
-            future: _image?.readAsBytes(),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.data != null) {
-                return SizedBox(
-                  height: 200,
-                  width: 200,
-                  child: Image.memory(snapshot.data),
-                );
-              }
-              return const SizedBox();
-            },
-          ),
+          // FutureBuilder(
+          //   future: _image?.readAsBytes(),
+          //   builder: (BuildContext context, AsyncSnapshot snapshot) {
+          //     if (snapshot.data != null) {
+          //       return SizedBox(
+          //         height: 200,
+          //         width: 200,
+          //         child: Image.memory(snapshot.data),
+          //       );
+          //     }
+          //     return const SizedBox();
+          //   },
+          // ),
           Padding(
             padding: PaddingItem.medium.str(),
             child: Form(
@@ -103,7 +105,12 @@ class _AcmaBilgiAddScreenState extends State<AcmaBilgiAddScreen> {
                     child: TextFormField(
                       controller: _decription,
                       decoration: customInputDecoration(
-                          "açıklama girin", "açıklama", context),
+                        "açıklama girin",
+                        "açıklama",
+                        context,
+                      ),
+                      minLines: 3,
+                      maxLines: 5,
                       validator: (String? value) {
                         if (value!.isEmpty) {
                           return 'Bu alan boş bırakılamaz.';
@@ -133,7 +140,7 @@ class _AcmaBilgiAddScreenState extends State<AcmaBilgiAddScreen> {
                   context.replaceRoute(AcmaBilgiRoute(acmaId: widget.acmaId));
                 } else {
                   // ignore: use_build_context_synchronously
-                  showSnackbar(context, "Acma oluşturlamadı !");
+                  showSnackbar(context, "Açma oluşturlamadı !");
                 }
               }
             },
